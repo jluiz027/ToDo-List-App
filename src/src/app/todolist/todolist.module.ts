@@ -19,7 +19,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { RouterModule } from '@angular/router';
 import { TodolistRoutingModule } from './todolist-routing.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -40,7 +40,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatFormFieldModule,
     FormsModule,
     TodolistRoutingModule,
-    MatTooltipModule
+    MatTooltipModule,
+    FlexLayoutModule
   ]
 })
 export class TodolistModule { }
