@@ -35,7 +35,7 @@ export class TodolistComponent {
   openAddNewTaskDialog(): void {
     const dialogRef = this.dialog.open(NewTaskDialogComponent, {
       width: '250px',
-      data: {description: "", title: ""}
+      data: {description: "", title: "", id: this.count++}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -49,32 +49,34 @@ export class TodolistComponent {
     });
   }
 
-  openDeleteTaskDialog(title): void {
+  openDeleteTaskDialog(task: TaskData): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '400px',
-      data: {description: "", title: title}
+      data: {description: "", title: task.title, id: task.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       if(result){
-        this.deleteTask(title);
+        this.deleteTask(task.id);
       }
       
     });
   }
 
   addNewTask(newTask: TaskData){
-    console.log(`Adding:  teste ${this.count}`)
+    console.log(`Adding:  ${newTask.title}`)
     this.rows.push(newTask)
     this.rows = [...this.rows];
     console.log(this.rows)
   }
 
-  deleteTask(title){
-    console.log(title)
-    let deleted = `${title}`;
-    this.rows = this.rows.filter(i => i.title != deleted)
+
+  
+  deleteTask(id){
+    console.log(id)
+    let deleted = `${id}`;
+    this.rows = this.rows.filter(i => i.id != deleted)
     console.log(`Deleting:  ${deleted}`)
     console.log(this.rows)
   }
