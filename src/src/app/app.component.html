@@ -1,0 +1,73 @@
+<mat-toolbar color="primary" style="height: 10%;">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="example-spacer"></span>
+  <span>To Do List</span>
+
+</mat-toolbar>
+<mat-sidenav-container class="example-container" style="height: 90%;">
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')"
+    (closed)="events.push('close!')">
+
+    <mat-nav-list >
+      <a mat-list-item routerLinkActive="active">
+        <mat-icon mat-list-icon>
+          checklist
+        </mat-icon>
+        <p mat-line> To Do List </p>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <!-- <div style="width: 100%; height: 80px;">
+      <div style="width: 50px; height: 50px; position: relative; margin-top: 20px; margin-right: 20px; background-color: brown; float: right;">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon >menu</mat-icon>
+        </button>
+      </div>
+    </div> -->
+    <div style="width: 75%;margin: 0 auto;">
+      <div
+        style="width: 50px; height: 50px; position: relative; margin-top: 20px; margin-right: 0px; margin-left: auto;">
+        <button mat-fab (click)="openAddNewTaskDialog()" color="primary">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+      <ngx-datatable class="material" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [selected]="selected"
+        [selectionType]="'checkbox'" [columnMode]="'force'" [selectAllRowsOnPage]="false" [limit]="5" rowHeight="auto">
+        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+          [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Title">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span title="Double click to edit" (dblclick)="editing[rowIndex + '-title'] = true"
+              *ngIf="!editing[rowIndex + '-title']">
+              {{ value }}
+            </span>
+            <input autofocus (blur)="updateValue($event, 'title', rowIndex)" *ngIf="editing[rowIndex + '-title']"
+              type="text" [value]="value" />
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Description">
+          <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+            <span title="Double click to edit" (dblclick)="editing[rowIndex + '-description'] = true"
+              *ngIf="!editing[rowIndex + '-description']">
+              {{ value }}
+            </span>
+            <input autofocus (blur)="updateValue($event, 'description', rowIndex)" *ngIf="editing[rowIndex + '-description']"
+              type="text" [value]="value" />
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <mat-icon style="cursor: pointer;" (click)="openDeleteTaskDialog(row['title'])" matTooltip="Delete"
+              [matTooltipPosition]="'right'">delete</mat-icon>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
