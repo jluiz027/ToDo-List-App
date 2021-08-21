@@ -87,3 +87,5 @@ export class TodolistComponent {
     console.log('UPDATED!', this.rows[rowIndex][cell]);
   }
 }
+
+
