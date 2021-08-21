@@ -42,7 +42,7 @@ jobs:
           projectBaseDir: .
           args: >
             -Dsonar.organization=jluiz027
-            -Dsonar.projectKey=ToDo-List-App
+            -Dsonar.projectKey=jluiz027_ToDo-List-App
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
