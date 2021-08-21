@@ -71,8 +71,6 @@ export class TodolistComponent {
     console.log(this.rows)
   }
 
-
-  
   deleteTask(id){
     console.log(id)
     let deleted = `${id}`;
